@@ -64,7 +64,7 @@ class ClientSearch extends Client
         }
 
         // grid filtering conditions
-        $query->with('clubs');
+        $query->with('clubs')->where(['deleted_at' => null]);
         $query->andFilterWhere(['like', 'full_name', $this->full_name]);
         $query->andFilterWhere(['gender' => $this->gender]);
 
