@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             //'updated_at',
             //'updated_by',
-            'deleted_at',
+//            'deleted_at',
             //'deleted_by',
             [
                 'class' => ActionColumn::class,
