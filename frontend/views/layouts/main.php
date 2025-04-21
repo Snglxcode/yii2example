@@ -10,6 +10,10 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
+$this->registerCssFile('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css');
+$this->registerJsFile('https://cdn.jsdelivr.net/npm/flatpickr', ['depends' => [\yii\web\JqueryAsset::class]]);
+
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -36,8 +40,9 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Clubs', 'url' => ['/club']],
+        ['label' => 'Clients', 'url' => ['/client']],
+//        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
