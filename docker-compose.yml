@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fitbase
+      MYSQL_USER: fitbase
+      MYSQL_PASSWORD: secret
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - yii2network
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-fpm
+    volumes:
+      - .:/var/www/html
+    networks:
+      - yii2network
+    working_dir: /var/www/html
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - yii2network
+    depends_on:
+      - php
+
+volumes:
+  db-data:
+
+networks:
+  yii2network:
